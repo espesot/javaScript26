@@ -1,0 +1,189 @@
+
+/* style.css */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: #f4f6f8;
+  color: #333;
+
+  min-height: 100vh;
+  padding: 40px 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+/* Primer div: formulario */
+body > div:first-of-type {
+  width: 100%;
+  max-width: 500px;
+
+  background-color: white;
+  padding: 30px;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+body > div:first-of-type label {
+  font-weight: bold;
+  color: #444;
+  margin-top: 5px;
+}
+
+body > div:first-of-type input {
+  width: 100%;
+  padding: 10px 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+body > div:first-of-type input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.15);
+}
+
+/* Botón Agregar */
+#add {
+  margin-top: 10px;
+  padding: 12px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: #28a745;
+  color: white;
+
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+#add:hover {
+  background-color: #218838;
+}
+
+#add:active {
+  transform: scale(0.98);
+}
+
+
+/* Segundo div: búsqueda */
+body > div:nth-of-type(2) {
+  width: 100%;
+  max-width: 500px;
+
+  background-color: white;
+  padding: 25px 30px;
+
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+body > div:nth-of-type(2) label {
+  font-weight: bold;
+  color: #444;
+}
+
+body > div:nth-of-type(2) input {
+  width: 100%;
+  padding: 10px 12px;
+
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+
+  outline: none;
+}
+
+body > div:nth-of-type(2) input:focus {
+  border-color: #007bff;
+}
+
+
+/* Botón Buscar */
+#filtrar {
+  padding: 11px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: #007bff;
+  color: white;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+#filtrar:hover {
+  background-color: #0056b3;
+}
+
+
+/* Tercer div: Mostrar Todos */
+body > div:nth-of-type(3) {
+  width: 100%;
+  max-width: 500px;
+}
+
+#all {
+  width: 100%;
+  padding: 11px;
+
+  border: none;
+  border-radius: 6px;
+
+  background-color: #6c757d;
+  color: white;
+
+  font-size: 15px;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  transition: background-color 0.2s;
+}
+
+#all:hover {
+  background-color: #545b62;
+}
+
+
+/* Adaptación para celulares */
+@media (max-width: 600px) {
+  body {
+    padding: 20px 15px;
+  }
+
+  body > div:first-of-type,
+  body > div:nth-of-type(2) {
+    padding: 20px;
+  }
+}
