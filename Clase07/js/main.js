@@ -11,11 +11,19 @@ class Producto {
 }
 
 productos.push(new Producto(1, 'Televisor de 55"', 150000, 'Tecno', 50))
-productos.push(new Producto(2, 'Aire Acondicionado F/C', 800000, 'Hogar', 30))
-productos.push(new Producto(3, 'Helader inverter', 900000, 'Electro', 20))
-productos.push(new Producto(5, 'Tostadora', 50000, 'Electro', 50))
-productos.push(new Producto(4, 'Lavarropa', 800000, 'Electro', 10))
-productos.push(new Producto(6, 'Pava Electrica', 70000, 'Hogar', 40))
+productos.push(new Producto(2, 'Televisor de 60"', 200000, 'Tecno', 40))
+productos.push(new Producto(3, 'Televisor de 75"', 250000, 'Tecno', 30))
+productos.push(new Producto(4, 'Televisor de 80"', 300000, 'Tecno', 30))
+productos.push(new Producto(5, 'Aire Acondicionado F/C 3000 F', 800000, 'Hogar', 30))
+productos.push(new Producto(6, 'Aire Acondicionado F/C 4500 F', 800000, 'Hogar', 30))
+productos.push(new Producto(7, 'Aire Acondicionado F/C 3000 inverter', 800000, 'Hogar', 30))
+productos.push(new Producto(8, 'Aire Acondicionado F/C 4500 inverter', 800000, 'Hogar', 30))
+productos.push(new Producto(9, 'Aire Acondicionado Ventana 3000 F', 800000, 'Hogar', 30))
+productos.push(new Producto(10, 'Aire Acondicionado Ventana 4500 F', 800000, 'Hogar', 30))
+productos.push(new Producto(11, 'Helader inverter', 900000, 'Electro', 20))
+productos.push(new Producto(12, 'Tostadora', 50000, 'Electro', 50))
+productos.push(new Producto(13, 'Lavarropa', 800000, 'Electro', 10))
+productos.push(new Producto(14, 'Pava Electrica', 70000, 'Hogar', 40))
 
 let btnAdd = document.getElementById('add')
 let nombre = document.querySelector('#name')
@@ -23,10 +31,11 @@ let newPrecio = document.querySelector('#price')
 let newCategoria = document.querySelector('#category')
 let newStock = document.querySelector('#stock')
 let divs = document.querySelectorAll('div')
+let busqueda = document.getElementById('busqueda')
+let btnBuscar = document.getElementById('filtrar')
+let contenedor = document.getElementById('contenedor-items')
 
-
-//Ver de agregar todo lo que esta en el btn en una funcion
-btnAdd.addEventListener('click', () => {
+function btnAgregar() {
   let p = document.createElement('h3')
   if (btnAdd.textContent == 'Agregar') {
     let nuevoID = productos.length + 1
@@ -36,6 +45,9 @@ btnAdd.addEventListener('click', () => {
     btnAdd.textContent = 'Limpiar'
 
     divs[0].appendChild(p)
+    //-------------------------- ELIMINAR CONS
+    //Para ver como queda el arr de productos
+    console.table(productos)
   } else {
     btnAdd.textContent = 'Agregar'
     nombre.value = ''
@@ -44,5 +56,38 @@ btnAdd.addEventListener('click', () => {
     newStock.value = ''
     divs[0].lastElementChild.remove()
   }
+}
+
+function render(arr){
+  // Modificar innerHTML para hacer varios div dentro del div principal
+  contenedor.innerHTML =''
+  arr.forEach((el)=>{
+    let card = document.createElement('div')
+    card.id
+    card.innerHTML = `
+    
+    <h3>${el.nombre}</h3>
+    <p>${el.precio}</p>
+    <h6>Stock disponible: ${el.stock}</h6>
+    <button id="comprar">Comprar</button>
+    
+`
+contenedor.append(card)
+  })
+}
+
+render(productos)
+
+
+btnAdd.addEventListener('click', btnAgregar
+
+)
+
+btnBuscar.addEventListener('click', () => {
+  console.log(busqueda.value)
+  let result = productos.filter(el=> el.nombre.toLowerCase().includes(busqueda.value.toLowerCase()))
+  console.table(result)
 })
+
+
 
