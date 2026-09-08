@@ -51,6 +51,7 @@ function btnAgregar() {
     btnAdd.textContent = 'Limpiar'
 
     divs[0].appendChild(p)
+    render(productos)
   } else {
     btnAdd.textContent = 'Agregar'
     nombre.value = ''
@@ -102,7 +103,6 @@ btnAdd.addEventListener('click', btnAgregar
 
 // boton para buscar ciertos productos por nombre
 btnBuscar.addEventListener('click', () => {
-  console.log(busqueda.value)
   let result = productos.filter(el => el.nombre.toLowerCase().includes(busqueda.value.toLowerCase()))
   render(result)
 })
