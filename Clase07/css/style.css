@@ -189,94 +189,72 @@ body > div:nth-of-type(3) {
 }
 
 
-
-
-
-
-
-/* para card!! */
-
-/* Card principal */
+/* Contenedor de las cards */
 #contenedor-items {
-  width: 280px;
-  min-height: 260px;
-  padding: 25px;
-  margin: 20px;
-
-  background-color: #ffffff;
-  border-radius: 15px;
-
-  /* Sombra */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.12);
-
-  /* Organización del contenido */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
 
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+/* Card */
+#contenedor-items > div {
+  width: 250px;
+  padding: 20px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 /* Efecto al pasar el mouse */
-#contenedor-items:hover {
+#contenedor-items > div:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
 }
 
 /* Nombre del producto */
 #contenedor-items h3 {
-  margin: 0 0 15px 0;
-
-  color: #2563eb;
-  font-size: 24px;
-  font-weight: 700;
-
-  text-transform: capitalize;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 22px;
 }
 
 /* Precio */
 #contenedor-items p {
-  margin: 5px 0;
-
-  color: #222;
+  margin-bottom: 10px;
+  color: #2e7d32;
   font-size: 20px;
   font-weight: bold;
 }
 
 /* Stock */
 #contenedor-items h6 {
-  margin: 10px 0 20px 0;
-
-  color: #16a34a;
+  margin: 10px 0 20px;
+  color: #666;
   font-size: 14px;
-  font-weight: 600;
 }
 
-/* Botón comprar */
-#contenedor-items #comprar {
-  width: 100%;
-  padding: 12px 20px;
-
+/* Botón Comprar */
+#contenedor-items button {
+  padding: 10px 20px;
   border: none;
   border-radius: 8px;
-
-  background-color: #2563eb;
+  background-color: #007bff;
   color: white;
-
   font-size: 16px;
-  font-weight: bold;
-
   cursor: pointer;
-
-  transition: background-color 0.3s ease;
+  transition: background-color 0.2s;
 }
 
 /* Hover del botón */
-#contenedor-items #comprar:hover {
-  background-color: #1d4ed8;
+#contenedor-items button:hover {
+  background-color: #0056b3;
 }
 
-/* Cuando se presiona el botón */
-#contenedor-items #comprar:active {
-  transform: scale(0.98);
-}
+
+
+
