@@ -22,19 +22,19 @@ prodStorage === null ? cargaProductos() : (productos = prodStorage)
 
 function cargaProductos() {
   productos.push(new Producto(1, 'Televisor de 55"', 150000, 'Tecno', 3))
-  productos.push(new Producto(2, 'Televisor de 60"', 200000, 'Tecno', 0))
+  productos.push(new Producto(2, 'Televisor de 60"', 200000, 'Tecno', 5))
   productos.push(new Producto(3, 'Televisor de 75"', 250000, 'Tecno', 4))
-  // productos.push(new Producto(4, 'Televisor de 80"', 300000, 'Tecno', 10))
-  // productos.push(new Producto(5, 'Aire Acondicionado F/C 3000 F', 800000, 'Hogar', 3))
-  // productos.push(new Producto(6, 'Aire Acondicionado F/C 4500 F', 800000, 'Hogar', 3))
-  // productos.push(new Producto(7, 'Aire Acondicionado F/C 3000 inverter', 800000, 'Hogar', 2))
-  // productos.push(new Producto(8, 'Aire Acondicionado F/C 4500 inverter', 800000, 'Hogar', 0))
-  // productos.push(new Producto(9, 'Aire Acondicionado Ventana 3000 F', 800000, 'Hogar', 1))
-  // productos.push(new Producto(10, 'Aire Acondicionado Ventana 4500 F', 800000, 'Hogar', 5))
-  // productos.push(new Producto(11, 'Helader inverter', 900000, 'Electro', 2))
-  // productos.push(new Producto(12, 'Tostadora', 50000, 'Electro', 0))
-  // productos.push(new Producto(13, 'Lavarropa', 800000, 'Electro', 1))
-  // productos.push(new Producto(14, 'Pava Electrica', 70000, 'Hogar', 2))
+  productos.push(new Producto(4, 'Televisor de 80"', 300000, 'Tecno', 10))
+  productos.push(new Producto(5, 'Aire Acondicionado F/C 3000 F', 800000, 'Hogar', 3))
+  productos.push(new Producto(6, 'Aire Acondicionado F/C 4500 F', 800000, 'Hogar', 3))
+  productos.push(new Producto(7, 'Aire Acondicionado F/C 3000 inverter', 800000, 'Hogar', 2))
+  productos.push(new Producto(8, 'Aire Acondicionado F/C 4500 inverter', 800000, 'Hogar', 0))
+  productos.push(new Producto(9, 'Aire Acondicionado Ventana 3000 F', 800000, 'Hogar', 1))
+  productos.push(new Producto(10, 'Aire Acondicionado Ventana 4500 F', 800000, 'Hogar', 5))
+  productos.push(new Producto(11, 'Helader inverter', 900000, 'Electro', 2))
+  productos.push(new Producto(12, 'Tostadora', 50000, 'Electro', 0))
+  productos.push(new Producto(13, 'Lavarropa', 800000, 'Electro', 1))
+  productos.push(new Producto(14, 'Pava Electrica', 70000, 'Hogar', 2))
   console.log(productos)
   localStorage.setItem('productos', JSON.stringify(productos))
 }
@@ -92,10 +92,21 @@ function recargarMetodos(arry) {
   return result
 }
 
+function descStock(id) {
+  let productosStock = getStorage()
+  let index = productosStock.findIndex(el => el.id == id)
+  let newStock = productosStock[index].stock -= 1
+  saveStorage(productosStock)
+  if(busqueda.value != ''){
+    let p = productosStock.filter(el=> el.nombre.toLowerCase().includes(busqueda.value.toLowerCase()))
+    render(p)
+  }else{
+    render(productosStock)
+  }
+}
 
 
 function render(arr) {
-  console.log(arr)
   contenedor.innerHTML = ''
   arr.forEach((el) => {
     let card = document.createElement('div')
@@ -112,15 +123,12 @@ function render(arr) {
       btnn.textContent = ''
     } else {
       btnn.addEventListener('click', () => {
-        console.log('click en venta')
-        el.venta()
+        descStock(el.id)
         if (el.stock == 0) {
-          cardStock.textContent = 'Sin stock'
           btnn.textContent = ''
         } else {
-          cardStock.textContent = `Stock disponible ${el.stock}`
+          cardStock.textContent = `Stock disponible: ${el.stock}`
         }
-        saveStorage(arr)
       })
     }
 
@@ -142,12 +150,8 @@ btnBuscar.addEventListener('click', () => {
 })
 
 btnTodos.addEventListener('click', () => {
+  busqueda.value = ''
   let productosBuscar = getStorage()
   productos = productosBuscar
   render(productos)
 })
-
-
-// Modificar el metodo para descontar stock
-// Tomar el ID y sobr el ID modificar el array y luego guardarlo
-// en caso de hacer un filtro no elimnar productos que no este...
