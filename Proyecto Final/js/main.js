@@ -16,26 +16,26 @@ async function cargaProductos() {
   localStorage.setItem('productos', JSON.stringify(productos))
 }
 
-async function getStorage() {
-  try {
-    let result = JSON.parse(localStorage.getItem('productos'))
-    let productoMetodo = recargarMetodos(result)
-    return productoMetodo
+// async function getStorage() {
+//   try {
+//     let result = JSON.parse(localStorage.getItem('productos'))
+//     let productoMetodo = recargarMetodos(result)
+//     return productoMetodo
 
-  } catch (error) {
-    console.log('Ocurrio un error de conexion', error)
-  } finally {
-    console.log('Conexion Exitosa')
-  }
-}
-
-
+//   } catch (error) {
+//     console.log('Ocurrio un error de conexion', error)
+//   } finally {
+//     console.log('Conexion Exitosa')
+//   }
+// }
 
 
-function saveStorage(arr) {
-  localStorage.setItem('productos', JSON.stringify(arr))
 
-}
+
+// function saveStorage(arr) {
+//   localStorage.setItem('productos', JSON.stringify(arr))
+
+// }
 
 
 let btnAdd = document.getElementById('add')
@@ -160,7 +160,10 @@ async function render(arr) {
           console.log('err')
           //swettAlert errror
         } else {
-            addCarrito(el.id,el.nombre,cantidad||1,parseInt(el.precio))
+          addCarrito(el.id, el.nombre, cantidad || 1, parseInt(el.precio))
+
+
+          //addCarrito(el.id,el.nombre,cantidad||1,parseInt(el.precio))
           // addCarrito(el.id,el.nombre,parseInt(cantidad||1),el.precio)
 
 
@@ -198,6 +201,14 @@ btnTodos.addEventListener('click', async () => {
   render(productos)
 })
 
+
+async function addCarrito(idProducto, nombre, cantidad, precio) {
+  let carrito = await getCarrito()
+  let id = carrito.length + 1
+  carrito.push(new Carrito(id, idProducto, nombre, cantidad, precio))
+  await saveCarrito(carrito)
+
+}
 
 // pasar el AddCarrito a esta parte.... por el tema del render....
 // y separar cada HTML con su JS para que no se superpongan..
