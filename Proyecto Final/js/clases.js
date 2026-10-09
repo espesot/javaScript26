@@ -26,8 +26,11 @@ class Carrito{
 async function getStorage() {
   try {
     let result = JSON.parse(localStorage.getItem('productos'))
-    let productoMetodo = recargarMetodos(result)
-    return productoMetodo
+    if(result === null){
+      return []
+    }else{
+      return result
+    }
 
   } catch (error) {
     console.log('Ocurrio un error de conexion', error)

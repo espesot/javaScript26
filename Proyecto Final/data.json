@@ -77,21 +77,21 @@
     "stock": 2
   },
   {
-    "id": 12,
+    "id": 25,
     "nombre": "Tostadora",
     "precio": 50000,
     "categoria": "Electro",
     "stock": 0
   },
   {
-    "id": 13,
+    "id": 18,
     "nombre": "Lavarropa",
     "precio": 800000,
     "categoria": "Electro",
     "stock": 1
   },
   {
-    "id": 14,
+    "id": 20,
     "nombre": "Pava Electrica",
     "precio": 70000,
     "categoria": "Hogar",

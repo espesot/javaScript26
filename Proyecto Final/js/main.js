@@ -16,27 +16,6 @@ async function cargaProductos() {
   localStorage.setItem('productos', JSON.stringify(productos))
 }
 
-// async function getStorage() {
-//   try {
-//     let result = JSON.parse(localStorage.getItem('productos'))
-//     let productoMetodo = recargarMetodos(result)
-//     return productoMetodo
-
-//   } catch (error) {
-//     console.log('Ocurrio un error de conexion', error)
-//   } finally {
-//     console.log('Conexion Exitosa')
-//   }
-// }
-
-
-
-
-// function saveStorage(arr) {
-//   localStorage.setItem('productos', JSON.stringify(arr))
-
-// }
-
 
 let btnAdd = document.getElementById('add')
 let nombre = document.querySelector('#name')
@@ -70,7 +49,7 @@ async function apiDolar() {
 
 
 async function btnAgregar() {
-
+  let nuevoID
   productos = await getStorage()
   if (nombre.value == '' || newPrecio.value == '' || newStock.value == '') {
     Swal.fire({
@@ -87,9 +66,10 @@ async function btnAgregar() {
       confirmButtonText: "Guardar",
       denyButtonText: `No Guardar`
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        let nuevoID = productos.length + 1
+        console.log(productos)
+        productos.length == 0 ? nuevoID = 1 :
+          nuevoID = (Math.max(...productos.map(producto => producto.id))) +1
         productos.push(new Producto(nuevoID, nombre.value, parseInt(newPrecio.value) || 10000, newCategoria.value || 'Generico', parseInt(newStock.value) || 2))
         saveStorage(productos)
         render(productos)
@@ -159,21 +139,10 @@ async function render(arr) {
         if (cantidad > el.stock) {
           console.log('err')
           //swettAlert errror
+          //Error por mayor cantidad que el stock
         } else {
           addCarrito(el.id, el.nombre, cantidad || 1, parseInt(el.precio))
-
-
-          //addCarrito(el.id,el.nombre,cantidad||1,parseInt(el.precio))
-          // addCarrito(el.id,el.nombre,parseInt(cantidad||1),el.precio)
-
-
         }
-        // descStock(el.id)
-        // if (el.stock == 0) {
-        //   btnn.textContent = ''
-        // } else {
-        //   cardStock.textContent = `Stock disponible: ${el.stock}`
-        // }
       })
     }
 
@@ -204,12 +173,14 @@ btnTodos.addEventListener('click', async () => {
 
 async function addCarrito(idProducto, nombre, cantidad, precio) {
   let carrito = await getCarrito()
-  let id = carrito.length + 1
+  
+  carrito.length == 0?
+    id = 1 :
+    id = Math.max(...carrito.map(carr => carr.id)) + 1
+  
+  // console.log(i)
+  console.log(id)
   carrito.push(new Carrito(id, idProducto, nombre, cantidad, precio))
   await saveCarrito(carrito)
 
 }
-
-// pasar el AddCarrito a esta parte.... por el tema del render....
-// y separar cada HTML con su JS para que no se superpongan..
-// index.html y main por un lado y carrito.js con carrito.html  en la parte de los script

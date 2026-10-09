@@ -42,7 +42,7 @@ async function main() {
   let arr = await getCarrito()
   console.log(arr)
   renderCarrito(arr)
-  calcularTotal(arr)
+  // calcularTotal(arr)
 
 }
 
@@ -68,12 +68,23 @@ async function calcularTotal(array) {
     `
     let btnDelete = card.querySelector('button')
     btnDelete.addEventListener('click',()=>{
-      //Ver en chatGPT la mejor manera de generar un ID
-      // Agregar para eliminar el articulo del carro...
-      console.log(el.id)
+      deleteProducto(el.id)
+      // console.log(el.id)
     })
     contenedorCarr.append(card)
   })
+  calcularTotal(arr)
 }
+
+async function deleteProducto(id) {
+  console.log(id)
+  let carrito = await getCarrito()
+  let index = carrito.findIndex((el) => el.id == id)
+  console.log(index)
+  carrito.splice(index,1)
+  await saveCarrito(carrito)
+  renderCarrito(carrito)
+}
+
 
 main()
